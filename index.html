@@ -666,6 +666,51 @@
       border-radius: 100px;
     }
 
+    .portfolio-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: #4ade80;
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      border-radius: 100px;
+      padding: 4px 12px;
+    }
+
+    .portfolio-live-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .portfolio-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition);
+    }
+
+    .portfolio-card-link:hover {
+      border-color: var(--gold);
+    }
+
     /* ===== SERVICES ===== */
     #services {
       background: var(--navy);
@@ -1068,13 +1113,18 @@
           <div class="portfolio-card-body">
             <p class="portfolio-card-cat">開発</p>
             <h3 class="portfolio-card-title">NIX DATAMINE</h3>
-            <p class="portfolio-card-desc">PCゲームのデータ分析情報サイト。Claude Code × GitHub Pagesで制作・公開済み。ゲームデータを収集・整理し、プレイヤーが活用できる情報サイトとして構築。</p>
+            <p class="portfolio-card-desc">PCゲームのデータ分析情報サイト。Claude Code × GitHub Pagesで制作・公開中。ゲームデータを収集・整理し、プレイヤーが活用できる情報サイトとして構築。</p>
             <div class="portfolio-tags">
               <span class="portfolio-tag">Claude Code</span>
               <span class="portfolio-tag">HTML</span>
               <span class="portfolio-tag">CSS</span>
               <span class="portfolio-tag">GitHub Pages</span>
+              <span class="portfolio-live-badge">公開中</span>
             </div>
+            <a href="https://shadow02r8-code.github.io/nix-datamine/nix-datamine-jp.html" target="_blank" rel="noopener noreferrer" class="portfolio-card-link">
+              サイトを見る
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
           </div>
         </div>
 
@@ -1097,13 +1147,18 @@
           <div class="portfolio-card-body">
             <p class="portfolio-card-cat">デザイン</p>
             <h3 class="portfolio-card-title">Amazon商品画像（スキンケア）</h3>
-            <p class="portfolio-card-desc">Photoshop・Python・Claude Designを組み合わせた7枚の商品画像制作。AI生成素材と手動レタッチを組み合わせ、高品質な商品ビジュアルを実現。</p>
+            <p class="portfolio-card-desc">Photoshop・Python・Claude Designを組み合わせた7枚の商品画像制作。AI生成素材と手動レタッチを組み合わせ、高品質な商品ビジュアルを実現。サイトとして公開中。</p>
             <div class="portfolio-tags">
               <span class="portfolio-tag">Photoshop</span>
               <span class="portfolio-tag">Python</span>
               <span class="portfolio-tag">Canva Pro</span>
               <span class="portfolio-tag">AI画像生成</span>
+              <span class="portfolio-live-badge">公開中</span>
             </div>
+            <a href="https://shadow02r8-code.github.io/Skincare-site/" target="_blank" rel="noopener noreferrer" class="portfolio-card-link">
+              サイトを見る
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
           </div>
         </div>
 
