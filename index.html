@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>板屋 峻一郎 | フリーランス Portfolio</title>
+  <meta name="description" content="SNS運用・プログラミング・AI活用のフリーランサー 板屋峻一郎のポートフォリオサイトです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #0A0E1A;
+      --navy-mid:  #111827;
+      --navy-light:#1A2234;
+      --gold:      #C8A96E;
+      --gold-light:#E0C992;
+      --gold-dark: #A08050;
+      --white:     #F5F0E8;
+      --gray:      #9CA3AF;
+      --border:    rgba(200, 169, 110, 0.2);
+      --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 { font-family: 'Space Mono', 'Noto Sans JP', monospace; font-weight: 700; }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+
+    /* ===== UTILITY ===== */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: var(--white);
+    }
+
+    .section-title span { color: var(--gold); }
+
+    .section-desc {
+      color: var(--gray);
+      font-size: 1rem;
+      max-width: 560px;
+      line-height: 1.9;
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 20px 0 40px;
+    }
+
+    /* ===== FADE-IN ANIMATION ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+    .fade-in-delay-4 { transition-delay: 0.4s; }
+    .fade-in-delay-5 { transition-delay: 0.5s; }
+
+    /* ===== NAVIGATION ===== */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+
+    #navbar.scrolled {
+      background: rgba(10, 14, 26, 0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold) !important;
+      padding: 8px 20px;
+      border-radius: 4px;
+      font-size: 0.8rem !important;
+      transition: background var(--transition), color var(--transition) !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold) !important;
+      color: var(--navy) !important;
+    }
+
+    .nav-cta::after { display: none !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      transition: var(--transition);
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(10, 14, 26, 0.98);
+      backdrop-filter: blur(12px);
+      padding: 24px;
+      border-bottom: 1px solid var(--border);
+      z-index: 999;
+    }
+
+    .nav-mobile.open { display: block; }
+
+    .nav-mobile ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .nav-mobile a {
+      font-size: 1rem;
+      color: var(--gray);
+      transition: color var(--transition);
+    }
+
+    .nav-mobile a:hover { color: var(--gold); }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0 60px;
+    }
+
+    /* Grid pattern background */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Glow orbs */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: 20%; right: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(200,169,110,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.05;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-name-en {
+      display: block;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+
+    .hero-catch {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+      font-weight: 300;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 600px;
+    }
+
+    .hero-catch strong {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 48px;
+    }
+
+    .skill-tag {
+      font-size: 0.8rem;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.05em;
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--gold);
+      background: rgba(200,169,110,0.05);
+      transition: background var(--transition), border-color var(--transition);
+    }
+
+    .skill-tag:hover {
+      background: rgba(200,169,110,0.12);
+      border-color: var(--gold);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      letter-spacing: 0.05em;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200,169,110,0.3);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: transparent;
+      color: var(--white);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border: 1px solid rgba(245,240,232,0.3);
+      border-radius: 4px;
+      transition: border-color var(--transition), color var(--transition), transform var(--transition);
+      letter-spacing: 0.05em;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--gray);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ===== ABOUT ===== */
+    #about {
+      background: var(--navy-mid);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--gray);
+      line-height: 2;
+      margin-bottom: 20px;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .about-card {
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .about-card:hover {
+      border-color: var(--gold);
+      transform: translateX(4px);
+    }
+
+    .about-card-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: rgba(200,169,110,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-card-body {}
+
+    .about-card-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .about-card-value {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    /* ===== SKILLS ===== */
+    #skills {
+      background: var(--navy);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .skill-card {
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+
+    .skill-card:hover {
+      border-color: rgba(200,169,110,0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.4);
+    }
+
+    .skill-card:hover::before { transform: scaleX(1); }
+
+    .skill-card-icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .skill-card-title {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .skill-list li {
+      font-size: 0.88rem;
+      color: var(--gray);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.6;
+    }
+
+    .skill-list li::before {
+      content: '▸';
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ===== PORTFOLIO ===== */
+    #portfolio {
+      background: var(--navy-mid);
+    }
+
+    .portfolio-filter {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .filter-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      padding: 8px 20px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--gray);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .portfolio-card {
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+
+    .portfolio-card:hover {
+      border-color: rgba(200,169,110,0.5);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 56px rgba(0,0,0,0.5);
+    }
+
+    .portfolio-card[data-hidden="true"] { display: none; }
+
+    .portfolio-card-thumb {
+      height: 200px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portfolio-card-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(200,169,110,0.05), transparent);
+    }
+
+    .portfolio-card-body { padding: 28px; }
+
+    .portfolio-card-cat {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .portfolio-card-title {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .portfolio-card-desc {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .portfolio-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .portfolio-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      padding: 4px 12px;
+      background: rgba(200,169,110,0.08);
+      border: 1px solid var(--border);
+      color: var(--gold);
+      border-radius: 100px;
+    }
+
+    /* ===== SERVICES ===== */
+    #services {
+      background: var(--navy);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-item {
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .service-item:hover {
+      border-color: rgba(200,169,110,0.5);
+      transform: translateY(-3px);
+    }
+
+    .service-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      background: rgba(200,169,110,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service-body {}
+
+    .service-title {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .service-desc {
+      font-size: 0.8rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      background: var(--navy-mid);
+    }
+
+    .contact-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-inner .section-label,
+    .contact-inner .section-title,
+    .contact-inner .section-desc {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-inner .divider {
+      margin: 20px auto 40px;
+    }
+
+    .contact-conditions {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin: 40px 0;
+    }
+
+    .contact-condition {
+      text-align: center;
+    }
+
+    .contact-condition-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .contact-condition-value {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 48px;
+    }
+
+    .btn-cw {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 4px;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      letter-spacing: 0.05em;
+    }
+
+    .btn-cw:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(200,169,110,0.35);
+    }
+
+    .btn-lance {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      background: transparent;
+      color: var(--gold);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 1.5px solid var(--gold);
+      border-radius: 4px;
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+      letter-spacing: 0.05em;
+    }
+
+    .btn-lance:hover {
+      background: var(--gold);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 72px 0; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-name { font-size: clamp(2.8rem, 12vw, 4rem); }
+      .contact-conditions { gap: 20px; }
+    }
+
+    @media (max-width: 520px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; }
+      .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+      .contact-buttons { flex-direction: column; align-items: stretch; }
+      .btn-cw, .btn-lance { justify-content: center; }
+    }
+
+    /* ===== GOLD ACCENT LINE ===== */
+    .gold-line {
+      display: inline-block;
+      position: relative;
+    }
+
+    .gold-line::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+      opacity: 0.5;
+      border-radius: 2px;
+    }
+
+    /* Noise texture overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">I.SHUNICHIRO</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-mobile" id="navMobile">
+    <ul>
+      <li><a href="#about" class="nav-mobile-link">About</a></li>
+      <li><a href="#skills" class="nav-mobile-link">Skills</a></li>
+      <li><a href="#portfolio" class="nav-mobile-link">Portfolio</a></li>
+      <li><a href="#services" class="nav-mobile-link">Services</a></li>
+      <li><a href="#contact" class="nav-mobile-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <p class="hero-eyebrow fade-in">Freelance Professional</p>
+        <h1 class="hero-name fade-in fade-in-delay-1">
+          板屋 峻一郎
+          <span class="hero-name-en">ITAYA SHUNICHIRO</span>
+        </h1>
+        <p class="hero-catch fade-in fade-in-delay-2">
+          <strong>技術 × AI × クリエイティブ</strong>で、<br>あなたの課題を解決します。
+        </p>
+        <div class="skill-tags fade-in fade-in-delay-3">
+          <span class="skill-tag">SNS運用</span>
+          <span class="skill-tag">プログラミング</span>
+          <span class="skill-tag">AI活用</span>
+          <span class="skill-tag">業務効率化</span>
+          <span class="skill-tag">画像制作</span>
+        </div>
+        <div class="hero-buttons fade-in fade-in-delay-4">
+          <a href="#portfolio" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            ポートフォリオを見る
+          </a>
+          <a href="#contact" class="btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            お問い合わせ
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-left fade-in">
+          <p class="section-label">About Me</p>
+          <h2 class="section-title">マルチスキルの<br><span>フリーランサー</span></h2>
+          <div class="divider"></div>
+          <div class="about-text">
+            <p>SNS運用・プログラミング・AIを活用した業務効率化・品質向上を掛け合わせたマルチスキルのフリーランサーです。</p>
+            <p>Claude CodeやChatGPT・Google GeminiなどのAIツールを日常的に業務へ組み込み、作業の品質と効率の両立を意識しています。</p>
+            <p>返信は原則1時間以内、納期厳守・誠実な対応をモットーに、長期的にご一緒できるクライアント様を歓迎しております。</p>
+          </div>
+        </div>
+        <div class="about-right">
+          <div class="about-card fade-in fade-in-delay-1">
+            <div class="about-card-icon">📅</div>
+            <div class="about-card-body">
+              <p class="about-card-label">稼働日</p>
+              <p class="about-card-value">月曜日〜土曜日（週6日）</p>
+            </div>
+          </div>
+          <div class="about-card fade-in fade-in-delay-2">
+            <div class="about-card-icon">⏱</div>
+            <div class="about-card-body">
+              <p class="about-card-label">稼働時間</p>
+              <p class="about-card-value">1日 3〜4時間</p>
+            </div>
+          </div>
+          <div class="about-card fade-in fade-in-delay-3">
+            <div class="about-card-icon">💬</div>
+            <div class="about-card-body">
+              <p class="about-card-label">レスポンス</p>
+              <p class="about-card-value">原則1時間以内</p>
+            </div>
+          </div>
+          <div class="about-card fade-in fade-in-delay-4">
+            <div class="about-card-icon">🛠</div>
+            <div class="about-card-body">
+              <p class="about-card-label">使用ツール</p>
+              <p class="about-card-value">Claude Code / ChatGPT / Gemini / Canva Pro / Photoshop</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">Skills</p>
+        <h2 class="section-title">提供できる<span>スキル</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card fade-in fade-in-delay-1">
+          <div class="skill-card-icon">📱</div>
+          <h3 class="skill-card-title">SNS運用</h3>
+          <ul class="skill-list">
+            <li>SNSアカウント管理・運用</li>
+            <li>投稿戦略の立案・実行</li>
+            <li>データ分析・改善提案</li>
+            <li>SNS自動化ツール開発（Claude Code使用）</li>
+          </ul>
+        </div>
+        <div class="skill-card fade-in fade-in-delay-2">
+          <div class="skill-card-icon">💻</div>
+          <h3 class="skill-card-title">プログラミング・開発</h3>
+          <ul class="skill-list">
+            <li>Webサイト・WebApp開発</li>
+            <li>Claude Code × GitHub Pages公開</li>
+            <li>Python（業務自動化・画像生成）</li>
+            <li>NotionデータベースからのWebサイト構築</li>
+          </ul>
+        </div>
+        <div class="skill-card fade-in fade-in-delay-3">
+          <div class="skill-card-icon">🤖</div>
+          <h3 class="skill-card-title">AI活用・業務効率化</h3>
+          <ul class="skill-list">
+            <li>Claude Code / ChatGPT Plus / Google Gemini</li>
+            <li>プロンプト設計・出力検証・品質改善</li>
+            <li>AI画像生成・素材制作</li>
+            <li>Canva Pro / Photoshop での制作</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PORTFOLIO ===== -->
+  <section id="portfolio" class="section">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title">制作<span>実績</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="portfolio-filter fade-in">
+        <button class="filter-btn active" data-filter="all">すべて</button>
+        <button class="filter-btn" data-filter="sns-ai">SNS・AI</button>
+        <button class="filter-btn" data-filter="dev">開発</button>
+        <button class="filter-btn" data-filter="design">デザイン</button>
+      </div>
+      <div class="portfolio-grid">
+
+        <div class="portfolio-card fade-in fade-in-delay-1" data-category="dev">
+          <div class="portfolio-card-thumb">🎮</div>
+          <div class="portfolio-card-body">
+            <p class="portfolio-card-cat">開発</p>
+            <h3 class="portfolio-card-title">NIX DATAMINE</h3>
+            <p class="portfolio-card-desc">PCゲームのデータ分析情報サイト。Claude Code × GitHub Pagesで制作・公開済み。ゲームデータを収集・整理し、プレイヤーが活用できる情報サイトとして構築。</p>
+            <div class="portfolio-tags">
+              <span class="portfolio-tag">Claude Code</span>
+              <span class="portfolio-tag">HTML</span>
+              <span class="portfolio-tag">CSS</span>
+              <span class="portfolio-tag">GitHub Pages</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-card fade-in fade-in-delay-2" data-category="sns-ai">
+          <div class="portfolio-card-thumb">⚡</div>
+          <div class="portfolio-card-body">
+            <p class="portfolio-card-cat">SNS・AI</p>
+            <h3 class="portfolio-card-title">SNS投稿自動化ツール</h3>
+            <p class="portfolio-card-desc">Claude Codeを活用して個人で構築したSNS投稿の自動化ツール。投稿文の生成から画像処理・スケジューリングまでを自動化し、運用工数を大幅削減。</p>
+            <div class="portfolio-tags">
+              <span class="portfolio-tag">Claude Code</span>
+              <span class="portfolio-tag">Python</span>
+              <span class="portfolio-tag">自動化</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-card fade-in fade-in-delay-3" data-category="design">
+          <div class="portfolio-card-thumb">🧴</div>
+          <div class="portfolio-card-body">
+            <p class="portfolio-card-cat">デザイン</p>
+            <h3 class="portfolio-card-title">Amazon商品画像（スキンケア）</h3>
+            <p class="portfolio-card-desc">Photoshop・Python・Claude Designを組み合わせた7枚の商品画像制作。AI生成素材と手動レタッチを組み合わせ、高品質な商品ビジュアルを実現。</p>
+            <div class="portfolio-tags">
+              <span class="portfolio-tag">Photoshop</span>
+              <span class="portfolio-tag">Python</span>
+              <span class="portfolio-tag">Canva Pro</span>
+              <span class="portfolio-tag">AI画像生成</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-card fade-in fade-in-delay-4" data-category="sns-ai">
+          <div class="portfolio-card-thumb">🎓</div>
+          <div class="portfolio-card-body">
+            <p class="portfolio-card-cat">SNS・AI</p>
+            <h3 class="portfolio-card-title">Udemyコース制作</h3>
+            <p class="portfolio-card-desc">非エンジニア向け「Claude Chat & Claude Code入門」全9セクションのコース制作中。AIツールの実践的な使い方を体系的に学べる内容で制作を進行中。</p>
+            <div class="portfolio-tags">
+              <span class="portfolio-tag">Claude</span>
+              <span class="portfolio-tag">AI教育</span>
+              <span class="portfolio-tag">コンテンツ制作</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">Services</p>
+        <h2 class="section-title">対応<span>業務</span></h2>
+        <div class="divider"></div>
+      </div>
+      <div class="services-grid">
+        <div class="service-item fade-in fade-in-delay-1">
+          <div class="service-icon">📱</div>
+          <div class="service-body">
+            <p class="service-title">SNS運用代行</p>
+            <p class="service-desc">アカウント管理・投稿・データ分析まで一括対応</p>
+          </div>
+        </div>
+        <div class="service-item fade-in fade-in-delay-2">
+          <div class="service-icon">🤖</div>
+          <div class="service-body">
+            <p class="service-title">AI活用・業務自動化</p>
+            <p class="service-desc">AIツールを活用した業務効率化・自動化システムの構築</p>
+          </div>
+        </div>
+        <div class="service-item fade-in fade-in-delay-3">
+          <div class="service-icon">🌐</div>
+          <div class="service-body">
+            <p class="service-title">Webサイト・LP制作</p>
+            <p class="service-desc">シングルファイルからフルWebAppまで幅広く対応</p>
+          </div>
+        </div>
+        <div class="service-item fade-in fade-in-delay-4">
+          <div class="service-icon">🎨</div>
+          <div class="service-body">
+            <p class="service-title">画像・バナー制作</p>
+            <p class="service-desc">Photoshop / Canva / AI生成を組み合わせた高品質制作</p>
+          </div>
+        </div>
+        <div class="service-item fade-in fade-in-delay-5">
+          <div class="service-icon">✍️</div>
+          <div class="service-body">
+            <p class="service-title">プロンプト設計・品質管理</p>
+            <p class="service-desc">AI出力の設計・検証・品質改善のコンサルティング</p>
+          </div>
+        </div>
+        <div class="service-item fade-in fade-in-delay-1">
+          <div class="service-icon">📊</div>
+          <div class="service-body">
+            <p class="service-title">データ集計・分析</p>
+            <p class="service-desc">Googleスプレッドシートを活用したデータ整理・可視化</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="contact-inner">
+        <p class="section-label fade-in">Contact</p>
+        <h2 class="section-title fade-in fade-in-delay-1">お<span>問い合わせ</span></h2>
+        <div class="divider fade-in fade-in-delay-1"></div>
+        <p class="section-desc fade-in fade-in-delay-2">長期的にご一緒できるクライアント様を歓迎しております。<br>まずはお気軽にご相談ください。</p>
+
+        <div class="contact-conditions fade-in fade-in-delay-3">
+          <div class="contact-condition">
+            <p class="contact-condition-label">稼働日</p>
+            <p class="contact-condition-value">月〜土</p>
+          </div>
+          <div class="contact-condition">
+            <p class="contact-condition-label">稼働時間</p>
+            <p class="contact-condition-value">1日 3〜4時間</p>
+          </div>
+          <div class="contact-condition">
+            <p class="contact-condition-label">返信速度</p>
+            <p class="contact-condition-value">1時間以内</p>
+          </div>
+        </div>
+
+        <div class="contact-buttons fade-in fade-in-delay-4">
+          <a href="https://crowdworks.jp" target="_blank" rel="noopener noreferrer" class="btn-cw">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            クラウドワークスを見る
+          </a>
+          <a href="https://lancers.jp" target="_blank" rel="noopener noreferrer" class="btn-lance">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            ランサーズを見る
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p class="footer-logo">I.SHUNICHIRO</p>
+    <p class="footer-copy">© 2025 板屋峻一郎 All rights reserved.</p>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navMobile = document.getElementById('navMobile');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navMobile.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.nav-mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navMobile.classList.remove('open');
+      });
+    });
+
+    // Intersection Observer for fade-in
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    // Portfolio filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        portfolioCards.forEach(card => {
+          const cat = card.dataset.category;
+          const show = filter === 'all' || cat === filter;
+          card.dataset.hidden = show ? 'false' : 'true';
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+
+    // Smooth scroll offset for fixed navbar
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const offset = 72;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
